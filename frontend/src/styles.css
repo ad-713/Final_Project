@@ -1,0 +1,58 @@
+/* Import AG Grid styles */
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-alpine.css"; /* You can choose other themes as well */
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* Light background for better contrast */
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: #333; /* Darker color for better readability */
+}
+
+/* AG Grid Theme Styles */
+.ag-theme-alpine {
+  width: 100%;
+  height: auto; /* Adjust height as needed */
+}
+
+/* Additional Styles */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full height to cover the viewport */
+}
+
+.content {
+  flex: 1; /* Allow content to grow and fill available space */
+  padding: 20px; /* Add padding for spacing */
+}
+
+/* Navbar styles (optional) */
+app-navbar {
+  background-color: #007bff; /* Navbar background color */
+  color: white; /* Navbar text color */
+}
+
+/* Responsive adjustments (optional) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem; /* Smaller title on smaller screens */
+  }
+
+  .content {
+    padding: 10px; /* Less padding on smaller screens */
+  }
+}
+
+
+/* Custom styles for mat-toolbar */
+.mat-toolbar {
+  background-color: #64B5F6 !important; /* Set to your desired lighter blue color */
+  color: white; /* Optional: Set text color to white for better contrast */
+}

@@ -1,0 +1,9 @@
+<p>movies works!</p>
+
+<div *ngIf="isBrowser">
+  <ag-grid-angular
+    class="ag-theme-alpine" style="width: 100%; height: 400px;"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs">
+  </ag-grid-angular>
+</div>

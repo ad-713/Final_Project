@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import { ColDef } from 'ag-grid-community';
+import type { ColDef } from 'ag-grid-community';
 import { AgGridAngular } from 'ag-grid-angular';
 import { CommonModule } from '@angular/common';
-import { AgGridModule } from 'ag-grid-angular';
-
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [AgGridAngular, CommonModule, AgGridModule],
+  imports: [AgGridAngular, CommonModule],
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css']
 })

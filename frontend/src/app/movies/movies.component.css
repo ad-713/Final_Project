@@ -1,4 +1,4 @@
 .ag-theme-alpine {
-  height: 500px; /* Set a fixed height for the grid */
-  width: 100%; /* Full width */
+  min-height: 500px;
+  height: 500px;
 }

@@ -4,9 +4,10 @@ import Joi from 'joi';
 const movieSchema = Joi.object({
     title: Joi.string().required(),
     director: Joi.string().required(),
-    releaseDate: Joi.string().required(),
+    releaseDate: Joi.date().iso().required(),
     genre: Joi.string().required()
 });
+
 
 export const validateMovie = (req: Request, res: Response, next: NextFunction): void => {
     const { error } = movieSchema.validate(req.body);

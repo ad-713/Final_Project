@@ -1,6 +1,7 @@
 import { Movie } from '../types/movie.types';
+import { movies } from '../data/movies';
 
-export let movies: Movie[] = [];
+export { movies }; // Re-export if other files depend on it.
 
 export const getAllMovies = (): Movie[] => {
     return movies;

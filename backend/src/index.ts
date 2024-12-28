@@ -5,21 +5,19 @@ import movieRoutes from './routes/movies';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(express.json());
-
 app.get('/', (req, res) => {
-    res.json({
-        message: 'Welcome to the Movie API',
-        endpoints: {
-            movies: '/api/movies',
-            movieById: '/api/movies/:id'
-        }
-    });
+    res.send('Movie API is running');
 });
 
+app.use(cors({
+    origin: 'http://localhost:4200', // Your Angular app's URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.use(express.json());
 app.use('/api/movies', movieRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-});
+})

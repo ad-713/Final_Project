@@ -1,11 +1,12 @@
-/* statistics.component.css */
-
-div {
-  text-align: center; /* Center align the chart */
+.chart-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
 }
 
-.highcharts-figure, .highcharts-data-table table {
-  min-width: 310px;
-  max-width: 800px;
-  margin: 1em auto;
+/* Using a more modern approach instead of ::ng-deep */
+:where(.chart-container) :is(.highcharts-container, .highcharts-root) {
+  width: 100% !important;
+  height: 100% !important;
 }

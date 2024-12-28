@@ -1,5 +1,27 @@
+<!-- home.component.html -->
 <section class="welcome-section">
   <h1>Welcome to Your Movie Hub!</h1>
   <p>Explore your favorite movies and gain insights with detailed statistics.</p>
   <button routerLink="/movies">Explore Movies</button>
+</section>
+
+<section class="movies-preview">
+  <h2>Latest Movies</h2>
+
+  <div *ngIf="isLoading" class="loading">
+    Loading movies...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error" class="movies-grid">
+    <div *ngFor="let movie of movies.slice(0, 4)" class="movie-card">
+      <h3>{{ movie.title }}</h3>
+      <p class="director">Director: {{ movie.director }}</p>
+      <p class="genre">Genre: {{ movie.genre }}</p>
+      <p class="release-date">Released: {{ movie.releaseDate }}</p>
+    </div>
+  </div>
 </section>

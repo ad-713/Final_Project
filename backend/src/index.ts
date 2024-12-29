@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(cors({
-    origin: 'http://localhost:4200', // Your Angular app's URL
+    origin: 'http://localhost:4200',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

@@ -3,7 +3,7 @@ import cors from 'cors';
 import movieRoutes from './routes/movies';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4200;
 
 app.get('/', (req, res) => {
     res.send('Movie API is running');

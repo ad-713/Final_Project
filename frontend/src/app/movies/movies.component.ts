@@ -66,6 +66,20 @@ export class MoviesComponent implements OnInit {
       headerName: "Genre",
       field: "genre",
       width: 150
+    },
+    {
+      headerName: "Actions",
+      field: "actions",
+      width: 120,
+      cellRenderer: (params: any) => {
+        const button = document.createElement('button');
+        button.innerHTML = 'Delete';
+        button.className = 'delete-button';
+        button.addEventListener('click', () => {
+          this.deleteMovie(params.data.id);
+        });
+        return button;
+      }
     }
   ];
 
@@ -97,6 +111,24 @@ export class MoviesComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  deleteMovie(id: number) {
+    if (confirm('Are you sure you want to delete this movie?')) {
+      this.isLoading = true;
+      this.error = null;
+
+      this.movieService.deleteMovie(id).subscribe({
+        next: () => {
+          this.loadMovies(); // Refresh the grid after deletion
+        },
+        error: (error) => {
+          console.error('Error deleting movie:', error);
+          this.error = 'Failed to delete movie. Please try again later.';
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
   onGridReady(params: GridReadyEvent) {

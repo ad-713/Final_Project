@@ -16,21 +16,21 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./statistics.component.css']
 })
 export class StatisticsComponent implements OnInit {
-  Highcharts: typeof Highcharts = Highcharts;
+  Highcharts: typeof Highcharts = Highcharts;  // Changed to uppercase
+  updateFlag = false;
+
   chartOptions: Highcharts.Options = {
     chart: {
-      type: 'pie'
+      type: 'pie',
+      spacingTop: 40,
+      backgroundColor: 'transparent'
     },
     title: {
-      text: 'Movie Genres Distribution'
+      text: 'Movie Genres Distribution',
+      margin: 20
     },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-      point: {
-        valueSuffix: '%'
-      }
+    credits: {
+      enabled: false
     },
     plotOptions: {
       pie: {
@@ -38,15 +38,16 @@ export class StatisticsComponent implements OnInit {
         cursor: 'pointer',
         dataLabels: {
           enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+          format: '<b>{point.name}</b>: {point.percentage:.1f}%',
+          distance: 20
         }
       }
     },
     series: [{
-      name: 'Genres',
       type: 'pie',
+      name: 'Genres',
       data: []
-    }] as any
+    }]
   };
 
   constructor(private movieService: MovieService) {}
@@ -55,38 +56,32 @@ export class StatisticsComponent implements OnInit {
     this.loadMovieData();
   }
 
-  loadMovieData(): void {
+  private loadMovieData(): void {
     this.movieService.getMovies().subscribe({
       next: (movies: Movie[]) => {
-        this.prepareChartData(movies);
+        const genreCount = this.countGenres(movies);
+        this.updateChartData(genreCount);
       },
-      error: (error) => {
-        console.error('Error fetching movies:', error);
-      }
+      error: (error) => console.error('Error fetching movies:', error)
     });
   }
 
-  prepareChartData(movies: Movie[]): void {
-    // Count genres
-    const genreCount = movies.reduce((acc, movie) => {
+  private countGenres(movies: Movie[]): Record<string, number> {
+    return movies.reduce((acc, movie) => {
       acc[movie.genre] = (acc[movie.genre] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
+  }
 
-    // Convert to series data
-    const seriesData = Object.entries(genreCount).map(([name, y]) => ({
-      name,
-      y
-    }));
+  private updateChartData(genreCount: Record<string, number>): void {
+    const seriesData = Object.entries(genreCount).map(([name, y]) => ({ name, y }));
 
-    // Update chart options
-    this.chartOptions = {
-      ...this.chartOptions,
-      series: [{
-        type: 'pie',
-        name: 'Genres',
-        data: seriesData
-      }] as any
-    };
+    this.chartOptions.series = [{
+      type: 'pie',
+      name: 'Genres',
+      data: seriesData
+    }];
+
+    this.updateFlag = true;  // Trigger chart update
   }
 }

@@ -4,9 +4,3 @@
   margin: 2rem auto;
   padding: 1rem;
 }
-
-/* Using a more modern approach instead of ::ng-deep */
-:where(.chart-container) :is(.highcharts-container, .highcharts-root) {
-  width: 100% !important;
-  height: 100% !important;
-}
